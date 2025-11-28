@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cotizaciones automáticas</title>
+
+    <!-- Google Font: DynaPuff -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;500;600&display=swap">
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous"
+    >
+
+    <!-- CSS -->
+    <style>
+        body {
+            font-family: "DynaPuff", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            background: radial-gradient(circle at top,
+                #ffeef5 0,
+                #fde3f1 30%,
+                #f8d8eb 55%,
+                #f4c9e0 75%,
+                #f0bed9 100%);
+            color: #2f1a24;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .app-container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #fff7fb, #ffe9f3);
+            border-radius: 26px;
+            border: 1px solid rgba(250, 190, 215, 0.8);
+            box-shadow:
+                0 14px 30px rgba(230, 160, 190, 0.25),
+                0 0 30px rgba(250, 225, 238, 0.55);
+            overflow: hidden;
+        }
+
+        .card-header {
+            border-bottom: 1px solid rgba(245, 195, 215, 0.8);
+            background: radial-gradient(circle at top left,
+                #ffeef7 0,
+                #ffdfe9 40%,
+                #ffd2e3 100%);
+        }
+
+        .title-main {
+            color: #3b1024;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+
+        .subtitle {
+            color: #4a2636;
+            font-size: 0.8rem;
+        }
+
+        .badge-soft {
+            background: rgba(255, 255, 255, 0.98);
+            color: #4a2636;
+            border: 1px solid rgba(210, 165, 190, 0.9);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .table-card {
+            background: linear-gradient(145deg, #ffeef7, #ffe3f2);
+            border-radius: 20px;
+            border: 1px solid rgba(245, 190, 215, 0.9);
+            padding: 4px;
+        }
+
+        .table-inner {
+            background: #fffafb;
+            border-radius: 16px;
+            border: 1px solid rgba(248, 220, 233, 0.9);
+            overflow: hidden;
+        }
+
+        table {
+            margin-top: 0 !important;
+            background: transparent;
+        }
+
+        thead th {
+            border-bottom-width: 1px;
+            font-weight: 500;
+            color: #a8507a !important;
+            background: linear-gradient(90deg, #ffeaf7 0, #ffe0f1 100%) !important;
+            border-bottom: 1px solid rgba(246, 196, 216, 0.9) !important;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+        }
+
+        tbody {
+            background: transparent;
+        }
+
+        tbody tr {
+            vertical-align: middle;
+            transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.15s ease;
+            color: #6d3b54;
+        }
+
+        tbody tr:nth-child(odd) {
+            background: rgba(255, 244, 250, 0.9);
+        }
+
+        tbody tr:nth-child(even) {
+            background: rgba(252, 237, 247, 0.9);
+        }
+
+        tbody tr:hover {
+            background: radial-gradient(circle at center,
+                rgba(252, 222, 236, 0.9),
+                rgba(255, 244, 250, 0.95));
+            transform: translateY(-1px);
+            box-shadow: 0 0 14px rgba(238, 188, 214, 0.55);
+        }
+
+        td, th {
+            text-align: center;
+            border: none;
+        }
+
+        .table > :not(caption) > * > * {
+            background-color: transparent !important;
+        }
+
+        .price-usd {
+            color: #f57fa9;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .price-ars {
+            color: #f5a588;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .blue-value {
+            color: #ab88e6;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .card-footer {
+            border-top: 1px solid rgba(245, 195, 215, 0.9);
+            background: radial-gradient(circle at bottom right,
+                #ffeaf6 0,
+                #ffdfeF 40%,
+                #ffd4ea 100%);
+        }
+
+        .footer-info {
+            color: #3c202c;
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+
+        .card-body::before {
+            content: "";
+            display: block;
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(90deg, transparent 0, rgba(246, 196, 216, 0.9) 50%, transparent 100%);
+            opacity: 0.8;
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding: 12px;
+            }
+            .title-main {
+                font-size: 0.9rem;
+                letter-spacing: 0.08em;
+            }
+            .subtitle {
+                font-size: 0.75rem;
+            }
+            .card {
+                border-radius: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="card border-0">
+        <div class="card-header d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 px-4 py-3">
+            <div>
+                <h2 class="h5 mb-1 title-main">Cotizaciones automáticas</h2>
+                <p class="mb-0 subtitle">Cotizacion en USD y en pesos</p>
+            </div>
+            <span class="badge rounded-pill badge-soft px-3 py-2">
+                💖 Theme: Sweet & Soft
+            </span>
+        </div>
+
+        <div class="card-body px-0 pt-0">
+            <div class="table-responsive table-card mx-3 my-3">
+                <div class="table-inner">
+                    <table class="table table-borderless table-sm mb-0 align-middle text-white">
+                        <thead>
+                            <tr>
+                                <th>Símbolo</th>
+                                <th>Precio USD</th>
+                                <th>Dólar Blue</th>
+                                <th>Precio ARS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer bg-transparent border-0 px-4 pb-3 pt-2 d-flex justify-content-between align-items-center">
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous">
+</script>
+
+<script>
+// =============================
+//   CONFIGURACIÓN
+// =============================
+
+// API de twelvedata, OJO TIENE 800 consultas diarias, 
+// crea la cuenta en https://twelvedata.com y pegas tu API abajo
+const API_KEY = "TU_API_KEY_DE_TWELVEDATA";
+
+// Lista fija de símbolos, aca añade mas simbolos
+// IMPORTANTE: cada simbolo = 1 consulta, maxima 800 diarias
+// NO EJECUTES NI ACTUALICES LA PAGINA DEMASIADAS VECES
+let symbols = [
+    "AAPL",
+    "MSFT",
+    "TSLA",
+    "AMZN",
+    "NVDA",
+];
+
+// =============================
+//   TRAER DÓLAR BLUE
+// =============================
+
+async function getBlue() {
+    try {
+        const res = await fetch("https://dolarapi.com/v1/dolares/blue");
+        const data = await res.json();
+        return data.venta;
+    } catch {
+        return "Error";
+    }
+}
+
+// =============================
+//   TRAER PRECIOS
+// =============================
+
+async function fetchPrices() {
+    if (symbols.length === 0) return;
+
+    const url = `https://api.twelvedata.com/price?symbol=${symbols.join(",")}&apikey=${API_KEY}`;
+
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const blue = await getBlue();
+        const table = document.getElementById("stockTable");
+        table.innerHTML = "";
+
+        symbols.forEach(sym => {
+            const info = data[sym];
+            let price = info && info.price ? Number(info.price) : "N/D";
+
+            // formateo para mostrar en USD (máx. 2 decimales)
+            const priceDisplay =
+                price !== "N/D" && !Number.isNaN(price)
+                    ? price.toFixed(2)
+                    : "N/D";
+
+            let ars = (price !== "N/D" && blue !== "Error")
+                ? (price * blue).toFixed(2)
+                : "N/D";
+
+            table.innerHTML += `
+                <tr>
+                    <td>${sym}</td>
+                    <td class="price-usd">${priceDisplay}</td>
+                    <td class="blue-value">${blue}</td>
+                    <td class="price-ars">${ars}</td>
+                </tr>
+            `;
+        });
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+// =============================
+//   INICIO AUTOMÁTICO
+// =============================
+
+fetchPrices();
+</script>
+
+</body>
+</html>
