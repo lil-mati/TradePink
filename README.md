@@ -33,22 +33,24 @@
 
 ## 🚀 Configuración
 
-1. Abre el archivo:
+1. Ingresa a https://twelvedata.com, crea una cuenta y obten tu API key (NO compartas esta key)
+
+2. Abre el archivo:
    - Cotizaciones automaticas.html
 
-2. Dentro del archivo, busca la sección de configuración en el `<script>`:
+3. Dentro del archivo, busca la sección de configuración en el `<script>`:
 
 ```js
 const API_KEY = "";
 ```
 
-3. Pega tu API key de Twelve Data entre las comillas:
+4. Pega tu API key de Twelve Data entre las comillas:
 
 ```js
 const API_KEY = "TU_API_KEY_DE_TWELVEDATA";
 ```
 
-4. Edita la lista de símbolos que se consultarán (por defecto):
+5. Edita la lista de símbolos que se consultarán (por defecto):
 
 ```js
 let symbols = [
@@ -68,7 +70,7 @@ Cada símbolo representa 1 consulta por actualización. Ajusta la lista según t
 
 No necesita backend. Se ejecuta directamente en el navegador.
 
-1. Siguiendo las instrucciones previas, edita API_KEY & symbols del archivo `Cotizaciones automaticas.html` con un editor de texto.
+1. Siguiendo las instrucciones previas, edita `API_KEY` & `symbols` del archivo `Cotizaciones automaticas.html` con un editor de texto.
 2. Abre el archivo `Cotizaciones automaticas.html`.
 3. Al cargar la página:
    - Se hace una petición a `https://dolarapi.com/v1/dolares/blue` para obtener el dólar blue.
