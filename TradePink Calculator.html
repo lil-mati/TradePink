@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>TradePink Calculator</title>
+
+    <!-- Google Font: DynaPuff -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;500;600&display=swap">
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous"
+    >
+
+    <!-- CSS -->
+    <style>
+        body {
+            font-family: "DynaPuff", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            background: radial-gradient(circle at top,
+                #ffeef5 0,
+                #fde3f1 30%,
+                #f8d8eb 55%,
+                #f4c9e0 75%,
+                #f0bed9 100%);
+            color: #2f1a24;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .app-container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #fff7fb, #ffe9f3);
+            border-radius: 26px;
+            border: 1px solid rgba(250, 190, 215, 0.8);
+            box-shadow:
+                0 14px 30px rgba(230, 160, 190, 0.25),
+                0 0 30px rgba(250, 225, 238, 0.55);
+            overflow: hidden;
+        }
+
+        .card-header {
+            border-bottom: 1px solid rgba(245, 195, 215, 0.8);
+            background: radial-gradient(circle at top left,
+                #ffeef7 0,
+                #ffdfe9 40%,
+                #ffd2e3 100%);
+        }
+
+        .title-main {
+            color: #3b1024;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+
+        .subtitle {
+            color: #4a2636;
+            font-size: 0.8rem;
+        }
+
+        .badge-soft {
+            background: rgba(255, 255, 255, 0.98);
+            color: #4a2636;
+            border: 1px solid rgba(210, 165, 190, 0.9);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .table-card {
+            background: linear-gradient(145deg, #ffeef7, #ffe3f2);
+            border-radius: 20px;
+            border: 1px solid rgba(245, 190, 215, 0.9);
+            padding: 4px;
+        }
+
+        .table-inner {
+            background: #fffafb;
+            border-radius: 16px;
+            border: 1px solid rgba(248, 220, 233, 0.9);
+            overflow: hidden;
+        }
+
+        table {
+            margin-top: 0 !important;
+            background: transparent;
+        }
+
+        thead th {
+            border-bottom-width: 1px;
+            font-weight: 500;
+            color: #a8507a !important;
+            background: linear-gradient(90deg, #ffeaf7 0, #ffe0f1 100%) !important;
+            border-bottom: 1px solid rgba(246, 196, 216, 0.9) !important;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+        }
+
+        tbody {
+            background: transparent;
+        }
+
+        tbody tr {
+            vertical-align: middle;
+            transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.15s ease;
+            color: #6d3b54;
+        }
+
+        tbody tr:nth-child(odd) {
+            background: rgba(255, 244, 250, 0.9);
+        }
+
+        tbody tr:nth-child(even) {
+            background: rgba(252, 237, 247, 0.9);
+        }
+
+        tbody tr:hover {
+            background: radial-gradient(circle at center,
+                rgba(252, 222, 236, 0.9),
+                rgba(255, 244, 250, 0.95));
+            transform: translateY(-1px);
+            box-shadow: 0 0 14px rgba(238, 188, 214, 0.55);
+        }
+
+        td, th {
+            text-align: center;
+            border: none;
+        }
+
+        .table > :not(caption) > * > * {
+            background-color: transparent !important;
+        }
+
+        .price-usd {
+            color: #f57fa9;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .price-ars {
+            color: #f5a588;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .blue-value {
+            color: #ab88e6;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .card-footer {
+            border-top: 1px solid rgba(245, 195, 215, 0.9);
+            background: radial-gradient(circle at bottom right,
+                #ffeaf6 0,
+                #ffdfeF 40%,
+                #ffd4ea 100%);
+        }
+
+        .footer-info {
+            color: #3c202c;
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+
+        .card-body::before {
+            content: "";
+            display: block;
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(90deg, transparent 0, rgba(246, 196, 216, 0.9) 50%, transparent 100%);
+            opacity: 0.8;
+        }
+
+        .calc-input {
+            max-width: 90px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .calc-input[type="number"] {
+            text-align: center;
+        }
+
+        .btn-pink-main {
+            background: #ff6fa8;
+            border-color: #ff6fa8;
+            color: #fff;
+        }
+        .btn-pink-main:hover {
+            background: #ff4f94;
+            border-color: #ff4f94;
+            color: #fff;
+        }
+
+        .btn-add-row-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            line-height: 1;
+            background: #7fd8a0;
+            border-color: #7fd8a0;
+            color: #fff;
+        }
+        .btn-add-row-circle:hover {
+            background: #63c486;
+            border-color: #63c486;
+            color: #fff;
+        }
+
+        .btn-remove-row-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            line-height: 1;
+            background: #ff7b88;
+            border-color: #ff7b88;
+            color: #fff;
+        }
+        .btn-remove-row-circle:hover {
+            background: #ff6472;
+            border-color: #ff6472;
+            color: #fff;
+        }
+
+        #resultsContainer {
+            font-size: 0.85rem;
+            color: #3c202c;
+            margin: 0;
+            padding: 6px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(245, 190, 215, 0.95);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 230, 243, 0.95));
+            box-shadow: 0 6px 14px rgba(230, 160, 190, 0.25);
+            min-height: 32px;
+        }
+
+        #resultsContainer.empty {
+            border-color: transparent;
+            background: transparent;
+            box-shadow: none;
+            padding: 0;
+            min-height: 0;
+        }
+
+        #resultsContainer p {
+            margin-bottom: 2px;
+            opacity: 0;
+            transform: translateY(4px);
+            animation: fadeInResult 0.35s ease-out forwards;
+        }
+
+        .result-pill {
+            display: inline-block;
+            padding: 0.05rem 0.25rem;
+            border-radius: 4px;     
+            background: transparent;
+            border: 1px solid #7b2fbf;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.9em;
+            color: #3b1024;
+        }
+
+        @keyframes fadeInResult {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding: 12px;
+            }
+            .title-main {
+                font-size: 0.9rem;
+                letter-spacing: 0.08em;
+            }
+            .subtitle {
+                font-size: 0.75rem;
+            }
+            .card {
+                border-radius: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <div class="card border-0">
+        <div class="card-header d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 px-4 py-3">
+            <div>
+                <h2 class="h5 mb-1 title-main">Calculadora de acciones</h2>
+                <p class="mb-0 subtitle">Calcula cuántas acciones tienes según tu inversión</p>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <span class="badge rounded-pill badge-soft px-3 py-2">
+                    💖 Theme: Sweet & Soft
+                </span>
+                <button type="button" id="addRowHeaderBtn" class="btn btn-add-row-circle js-add-row-header">+</button>
+            </div>
+        </div>
+
+        <div class="card-body px-0 pt-0">
+            <div class="table-responsive table-card mx-3 my-3">
+                <div class="table-inner">
+                    <table class="table table-borderless table-sm mb-0 align-middle text-white">
+                        <thead>
+                            <tr>
+                                <th>Símbolo</th>
+                                <th>Precio por acción (USD)</th>
+                                <th>Monto invertido (USD)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTable">
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control form-control-sm text-center js-symbol"/>
+                                </td>
+                                <td>
+                                    <input type="number" step="0.0001" min="0"
+                                           class="form-control form-control-sm calc-input js-price" />
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-center gap-1">
+                                        <input type="number" step="0.01" min="0"
+                                               class="form-control form-control-sm calc-input js-invested" />
+                                        <button type="button"
+                                                class="btn btn-remove-row-circle js-remove-row">-</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="px-4 pb-3 d-flex align-items-start gap-2">
+                <div id="resultsContainer" class="flex-grow-1 empty"></div>
+                <div class="text-end">
+                    <button id="recalcBtn" class="btn btn-sm btn-pink-main" style="white-space: nowrap;">
+                        Calcular todo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer bg-transparent border-0 px-4 pb-3 pt-2 d-flex justify-content-between align-items-center">
+            <span class="footer-info">
+                Ingresa el precio por acción y el monto invertido. La cantidad = monto / precio.
+            </span>
+            <span class="footer-info text-end">
+                made by:­­­ ­
+                <a href="https://github.com/lil-mati"
+                   class="footer-info"
+                   style="text-decoration: underline; color:inherit;"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    lil.mati 久愛
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+<script>
+// Calcula la cantidad de acciones por fila y devuelve un objeto
+function calcularFila(row) {
+    const symbolInput   = row.querySelector(".js-symbol");
+    const priceInput    = row.querySelector(".js-price");
+    const investedInput = row.querySelector(".js-invested");
+
+    const symbol  = (symbolInput?.value || "").trim() || "acción";
+    const price   = parseFloat(priceInput?.value);
+    const invested = parseFloat(investedInput?.value);
+
+    if (!isNaN(price) && price > 0 && !isNaN(invested) && invested >= 0) {
+        const qty = invested / price;
+        return { symbol, qty };
+    }
+    return null;
+}
+
+// Calcula todas las filas y pinta el texto en el recuadro
+function calcularTodo() {
+    const rows = document.querySelectorAll("#stockTable tr");
+    const results = [];
+    rows.forEach(row => {
+        const r = calcularFila(row);
+        if (r) results.push(r);
+    });
+
+    const container = document.getElementById("resultsContainer");
+    container.innerHTML = "";
+
+    if (results.length === 0) {
+        container.classList.add("empty");
+        return;
+    }
+
+    results.forEach((r, index) => {
+        const p = document.createElement("p");
+
+        const qtySpan = document.createElement("span");
+        qtySpan.className = "result-pill";
+        qtySpan.textContent = r.qty.toFixed(4);
+
+        const symbolSpan = document.createElement("span");
+        symbolSpan.className = "result-pill ms-1";
+        symbolSpan.textContent = r.symbol;
+
+        p.append("Tienes ", qtySpan, " acciones de ", symbolSpan);
+        p.style.animationDelay = `${index * 0.05}s`;
+        container.appendChild(p);
+    });
+
+    container.classList.remove("empty");
+}
+
+// Clonar una fila (usada para "+")
+function clonarFila(baseRow) {
+    const newRow = baseRow.cloneNode(true);
+    // limpiar valores
+    newRow.querySelectorAll("input").forEach(inp => { inp.value = ""; });
+    return newRow;
+}
+
+// Actualiza visibilidad del botón "-" (solo desde la segunda fila)
+function actualizarBotonesEliminar() {
+    const rows = document.querySelectorAll("#stockTable tr");
+    rows.forEach((row, index) => {
+        const removeBtn = row.querySelector(".js-remove-row");
+        if (!removeBtn) return;
+        removeBtn.style.visibility = index === 0 ? "hidden" : "visible";
+    });
+}
+
+// Manejo de - en la tabla
+document.getElementById("stockTable").addEventListener("click", (e) => {
+    const target = e.target;
+    const tbody = e.currentTarget;
+
+    if (target.classList.contains("js-remove-row")) {
+        const rows = tbody.querySelectorAll("tr");
+        if (rows.length > 1) {
+            const row = target.closest("tr");
+            row.remove();
+            actualizarBotonesEliminar();
+        }
+    }
+});
+
+// Botón +
+document.getElementById("addRowHeaderBtn").addEventListener("click", () => {
+    const tbody = document.getElementById("stockTable");
+    const baseRow = tbody.querySelector("tr");
+    const nueva = clonarFila(baseRow);
+    tbody.appendChild(nueva);
+    actualizarBotonesEliminar();
+});
+
+// Inicializar visibilidad del botón -
+actualizarBotonesEliminar();
+
+// Botón "Calcular todo"
+document.getElementById("recalcBtn").addEventListener("click", calcularTodo);
+</script>
+</body>
+</html>
