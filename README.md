@@ -38,7 +38,7 @@ Panel local para ver cotizaciones de acciones en:
 Te llevara a la vista del archivo en GitHub, luego das click a descargar:
 
 - Cotizaciones_Automaticas:
-[Download HTML](https://raw.githubusercontent.com/lil-mati/TradePink/main/Cotizaciones_automaticas.html)
+[Download HTML](https://raw.githubusercontent.com/lil-mati/TradePink/main/TradePink.html)
 
 --- 
 
@@ -47,7 +47,7 @@ Te llevara a la vista del archivo en GitHub, luego das click a descargar:
 1. Ingresa a https://twelvedata.com, crea una cuenta y obten tu API key (NO compartas esta key)
 
 2. Abre el archivo:
-   - Cotizaciones automaticas.html
+   - TradePink.html
 
 3. Dentro del archivo, busca la sección de configuración en el `<script>`:
 
@@ -81,8 +81,8 @@ Cada símbolo representa 1 consulta por actualización. Ajusta la lista según t
 
 No necesita backend. Se ejecuta directamente en el navegador.
 
-1. Siguiendo las instrucciones previas, edita `API_KEY` & `symbols` del archivo `Cotizaciones automaticas.html` con un editor de texto.
-2. Abre el archivo `Cotizaciones automaticas.html`.
+1. Siguiendo las instrucciones previas, edita `API_KEY` & `symbols` del archivo `TradePink.html` con un editor de texto.
+2. Abre el archivo `TradePink.html`.
 3. Al cargar la página:
    - Se hace una petición a `https://dolarapi.com/v1/dolares/blue` para obtener el dólar blue.
    - Se consultan los precios de las acciones en `https://api.twelvedata.com`.
@@ -95,8 +95,8 @@ No necesita backend. Se ejecuta directamente en el navegador.
 
 ## 🧰 Herramientas
 
-- HTML + CSS + JavaScript puro
-- Bootstrap 5 (layout y tablas)
+- HTML + CSS + JavaScript
+- Bootstrap 5
 - Google Fonts – DynaPuff
 - APIs externas:
   - Twelve Data — precios en USD (https://twelvedata.com)
