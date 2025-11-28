@@ -38,7 +38,7 @@ Panel local para ver cotizaciones de acciones en:
 Te llevara a la vista del archivo en GitHub, luego das click a descargar:
 
 - Cotizaciones_Automaticas:
-[Download HTML](https://raw.githubusercontent.com/lil-mati/TradePink/main/TradePink.html)
+[Download HTML](https://github.com/lil-mati/TradePink/blob/main/TradePink.html)
 
 --- 
 
