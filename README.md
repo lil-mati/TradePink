@@ -14,7 +14,7 @@
 
 ---
 
-## 📋 Descripción
+## 📋 Descripción TradePink (Panel)
 
 Panel local para ver cotizaciones de acciones en:
 
@@ -24,7 +24,27 @@ Panel local para ver cotizaciones de acciones en:
 
 ---
 
-## ✅ Requisitos
+## 🔢 Descripcion TradePink Calculator
+
+Calculadora local y muy simple para calcular cuántas acciones tienes según tu inversión, funciona completamente en el navegador.
+
+Cómo usarla:
+
+1. Abre TradePink_Calculator.html.
+2. Por cada fila:
+   - Ingresa el Símbolo.
+   - Ingresa Precio por acción (USD).
+   - Ingresa Monto invertido (USD).
+3. Para añadir filas usa el botón "+" en la cabecera; para eliminar usa "-" en cada fila.
+4. Presiona "Calcular todo".
+5. En el recuadro de resultados verás una línea por cada entrada con la cantidad de acciones calculadas (monto / precio), redondeada a 4 decimales.
+
+Notas:
+- Valida que el precio sea > 0. Si los campos están incompletos o inválidos, esa fila se ignora en el cálculo.
+
+---
+
+## ✅ Requisitos TradePink (Panel)
 
 - Navegador web.
 - Editor de texto (Visual Studio Code, Sublime, Bloc de notas, etc)
@@ -37,12 +57,14 @@ Panel local para ver cotizaciones de acciones en:
 
 Te llevara a la vista del archivo en GitHub, luego das click a descargar:
 
-- Cotizaciones_Automaticas:
+- TradePink:
 [Download HTML](https://github.com/lil-mati/TradePink/blob/main/TradePink.html)
+- TradePink Calculator:
+[Download HTML](https://github.com/lil-mati/TradePink/blob/main/TradePink_Calculator.html)
 
 --- 
 
-## 🚀 Configuración
+## 🚀 Configuración TradePink (Panel)
 
 1. Ingresa a https://twelvedata.com, crea una cuenta y obten tu API key (NO compartas esta key)
 
@@ -77,7 +99,7 @@ Cada símbolo representa 1 consulta por actualización. Ajusta la lista según t
 
 ---
 
-## 🛠️ Ejecución (local)
+## 🛠️ Ejecución TradePink (local)
 
 No necesita backend. Se ejecuta directamente en el navegador.
 
