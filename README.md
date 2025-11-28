@@ -14,7 +14,9 @@
 
 ---
 
-📋 Panel local para ver cotizaciones de acciones en:
+## 📋 Descripción
+
+Panel local para ver cotizaciones de acciones en:
 
 - USD (precio en tiempo casi real con Twelve Data)
 - Dólar blue (DolarAPI)
@@ -30,6 +32,15 @@
 - Conexión a internet (para llamadas a APIs y recursos CDN como Bootstrap / Google Fonts)
 
 ---
+
+## ⬇️ Descarga
+
+Te llevara a la vista del archivo en GitHub, luego das click a descargar:
+
+- Cotizaciones_Automaticas:
+[Download HTML](https://raw.githubusercontent.com/lil-mati/TradePink/main/Cotizaciones_automaticas.html)
+
+--- 
 
 ## 🚀 Configuración
 
